@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Cliente } from "../models/cliente";
 import ImpactoBarbeariaServico from "../servicos/impacto-barbearia-servico";
 import ModalCriacaoCliente from "./componentes/modal-criacao-cliente";
-import TabelaClientes from "./componentes/tabela-clientes";
+import CardsClientes from "./componentes/cards-clientes";
 
 const Dashboard = () => {
     const [clientes, setClientes] = useState<Cliente[]>([]);
@@ -56,7 +56,8 @@ const Dashboard = () => {
 
     return(
         <>
-            <h1>Clientes</h1>
+            <h1 className='titulo'>Impacto Barbearia</h1>
+            <h2>Clientes</h2>
             <ModalCriacaoCliente 
                 abrirModal={abrirModal}
                 fecharModal={fecharModal}
@@ -74,7 +75,7 @@ const Dashboard = () => {
                         data-target="#exampleModal">
                         Adicionar cliente
                     </button>
-                    <TabelaClientes 
+                    <CardsClientes 
                         clientes={clientes}
                         abrirModalAtualizacao={abrirModalAtualizacao} 
                         deletarCliente={deletarCliente}/>     
