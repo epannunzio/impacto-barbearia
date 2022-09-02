@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.titulo {
+  margin: 2rem;
+}
+
+.modal {
+  max-width: none !important;
+  min-width: 90% !important;
+}
+
+.cliente-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cliente-form div {
+  margin: 0.7rem;
+}
+
+.clientes-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
+  flex-wrap: wrap;
+}
+
+.cliente-card {
+  border: 1px solid #dedede;
+  width: 25rem;
+  padding: 2em;
+  border-radius: 10px;
+  margin: 1em;
+}
+
+.cliente-card-nome {
+  font-size: 2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cliente-card-botoes {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.cliente-card-botoes button {
+  margin: 0.5rem;
+  width: 8rem;
+}
