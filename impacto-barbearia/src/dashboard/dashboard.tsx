@@ -16,13 +16,13 @@ const Dashboard = () => {
     }
 
     const criarCliente = async (cliente: Cliente) => {
-        const resposta = await ImpactoBarbeariaServico.criarCliente(cliente);
+        await ImpactoBarbeariaServico.criarCliente(cliente);
         buscarClientes();
         fecharModal();
     }
 
     const deletarCliente = async (id: string) => {
-        const resposta = await ImpactoBarbeariaServico.excluirCliente(id);
+        await ImpactoBarbeariaServico.excluirCliente(id);
         buscarClientes();
     }
 
