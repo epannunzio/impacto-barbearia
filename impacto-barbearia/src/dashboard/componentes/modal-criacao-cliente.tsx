@@ -14,12 +14,13 @@ interface IModalClienteProps {
 const ModalCriacaoCliente = ({abrirModal, fecharModal, criarCliente, estaAtualizando, atualizarCliente, clienteSendoAtualizado}: IModalClienteProps) => {
     return (
         <Modal 
+            contentClassName='modal'
             show={abrirModal}
             animation={true}
             backdrop={true}
             onHide={() => fecharModal()}>
             <ModalHeader>
-                Modal title
+                { estaAtualizando ? 'Atualizar cliente' : 'Adicionar Cliente'} 
             </ModalHeader>
             <ModalBody>
                 <FormularioCliente 
