@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://localhost:7138/' 
+    baseURL: process.env.REACT_APP_IMPACTO_BARBEARIA_BACKEND_URL
 });
 
 export default api;

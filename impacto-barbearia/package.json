@@ -12,6 +12,7 @@
     "@types/react-dom": "^18.0.6",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
+    "dotenv": "^16.0.2",
     "formik": "^2.2.9",
     "jquery": "^3.6.1",
     "popper": "^1.0.1",

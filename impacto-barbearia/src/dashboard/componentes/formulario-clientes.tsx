@@ -62,7 +62,12 @@ const FormularioCliente = ({criarCliente, estaAtualizando, atualizarCliente, cli
                     </div>
                     <div className='form-control col-2'>
                         <label htmlFor="numero">Numero</label>
-                        <Field type="text" name="numero" placeholder='Ex: 912345678' className="form-control"/>
+                        <Field 
+                            type="text" 
+                            name="numero" 
+                            placeholder='Ex: 912345678'
+                            mask="+7 (999) 999-99-99" 
+                            className="form-control"/>
                         <ErrorMessage name="numero" component="div" />
                     </div>
                     <button type="submit" className="btn btn-primary">
