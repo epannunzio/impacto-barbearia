@@ -8,7 +8,7 @@ const Dashboard = () => {
     const [clientes, setClientes] = useState<Cliente[]>([]);
     const [abrirModal, setAbrirModal] = useState<boolean>(false);
     const [estaAtualizando, setEstaAtualizando] = useState<boolean>(false);
-    const [clienteSendoAtualizado, setClientesendoAtualizado] = useState<Cliente|undefined>();
+    const [clienteSendoAtualizado, setClientesendoAtualizado] = useState<Cliente | undefined>();
 
     const buscarClientes = async () => {
         const resposta = await ImpactoBarbeariaServico.buscarTodosOsClientes();
@@ -54,31 +54,31 @@ const Dashboard = () => {
         buscarClientes();
     }, []);
 
-    return(
+    return (
         <>
             <h1 className='titulo'>Impacto Barbearia</h1>
             <h2>Clientes</h2>
-            <ModalCriacaoCliente 
+            <ModalCriacaoCliente
                 abrirModal={abrirModal}
                 fecharModal={fecharModal}
                 criarCliente={criarCliente}
                 estaAtualizando={estaAtualizando}
                 atualizarCliente={atualizarCliente}
-                clienteSendoAtualizado={clienteSendoAtualizado}/>
-            {clientes.length ? 
+                clienteSendoAtualizado={clienteSendoAtualizado} />
+            {clientes.length ?
                 <>
                     <button
-                        onClick={() => mostrarModal()} 
-                        type="button" 
-                        className="btn btn-primary" 
-                        data-toggle="modal" 
+                        onClick={() => mostrarModal()}
+                        type="button"
+                        className="btn btn-primary"
+                        data-toggle="modal"
                         data-target="#exampleModal">
                         Adicionar cliente
                     </button>
-                    <CardsClientes 
+                    <CardsClientes
                         clientes={clientes}
-                        abrirModalAtualizacao={abrirModalAtualizacao} 
-                        deletarCliente={deletarCliente}/>     
+                        abrirModalAtualizacao={abrirModalAtualizacao}
+                        deletarCliente={deletarCliente} />
                 </> : (<p>Carregando clientes...</p>)}
         </>
     );
