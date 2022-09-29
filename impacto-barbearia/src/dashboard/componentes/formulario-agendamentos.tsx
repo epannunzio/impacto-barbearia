@@ -89,7 +89,7 @@ const FormularioAgendamentos = ({
                         <div className='row'>
                             <div className='form-group col-md-12'>
                                 <label htmlFor="cliente">Cliente</label>
-                                <Field as='select' name="cliente" className="form-control" onChange={(event: ChangeEvent<HTMLSelectElement>) => {
+                                <Field as='select' name="cliente" className="form-control" required onChange={(event: ChangeEvent<HTMLSelectElement>) => {
                                     const element = event.target as HTMLSelectElement;
                                     setClienteSelecionado(element.value);
                                 }}>
