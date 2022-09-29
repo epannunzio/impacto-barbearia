@@ -28,8 +28,8 @@ function App() {
         </nav>
         <Routes>
           <Route path='/' element={<Dashboard />} />
-          <Route path='clientes' element={<PaginaClientes />} />
-          <Route path='agendamentos' element={<PaginaAgendamentos />} />
+          <Route path='/clientes' element={<PaginaClientes />} />
+          <Route path='/agendamentos' element={<PaginaAgendamentos />} />
         </Routes>
       </BrowserRouter>
     </div>
