@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Dashboard from './dashboard/dashboard';
 import PaginaAgendamentos from './dashboard/paginas/agendamentos';
 import PaginaClientes from './dashboard/paginas/clientes';
 
