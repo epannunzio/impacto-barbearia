@@ -1,4 +1,4 @@
-import { Agendamento, AgendamentoViewModel } from "../models/agendamento";
+import { AgendamentoViewModel } from "../models/agendamento";
 import { Cliente } from "../models/cliente";
 import api from "./api";
 

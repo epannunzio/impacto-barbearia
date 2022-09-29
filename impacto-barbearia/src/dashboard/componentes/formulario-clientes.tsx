@@ -1,5 +1,4 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { Agendamento } from "../../models/agendamento";
 import { Cliente } from "../../models/cliente";
 
 interface IFormularioClienteProps {

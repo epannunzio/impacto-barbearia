@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Cliente } from "../../models/cliente";
 import ImpactoBarbeariaServico from "../../servicos/impacto-barbearia-servico";
 

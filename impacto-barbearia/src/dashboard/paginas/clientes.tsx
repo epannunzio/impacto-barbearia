@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Cliente } from "../../models/cliente";
-import ImpactoBarbeariaServico from "../../servicos/impacto-barbearia-servico";
 import CardsClientes from "../componentes/cards-clientes";
 import ModalCriacaoCliente from "../componentes/modal-criacao-cliente";
 import useClientes from "../hooks/use-clientes-hook";
@@ -10,25 +9,6 @@ const PaginaClientes = () => {
     const [estaAtualizando, setEstaAtualizando] = useState<boolean>(false);
     const [clienteSendoAtualizado, setClientesendoAtualizado] = useState<Cliente | undefined>();
     const { clientes, atualizarCliente, criarCliente, deletarCliente } = useClientes();
-
-    // const criarCliente = async (cliente: Cliente) => {
-    //     await ImpactoBarbeariaServico.criarCliente(cliente);
-    //     atualizarClientes([...clientes.current, cliente]);
-    //     fecharModal();
-    // }
-
-    // const deletarCliente = async (id: string) => {
-    //     await ImpactoBarbeariaServico.excluirCliente(id);
-    //     atualizarClientes(clientes.current.filter(cliente => cliente.id !== id));
-    // }
-
-    // const atualizarCliente = async (cliente: Cliente) => {
-    //     await ImpactoBarbeariaServico.atualizarCliente(cliente).then(_ => {
-    //         setClientesendoAtualizado(undefined);
-    //         fecharModal();
-    //         atualizarClientes([]);
-    //     });
-    // }
 
     const abrirModalAtualizacao = (cliente: Cliente) => {
         setEstaAtualizando(true);

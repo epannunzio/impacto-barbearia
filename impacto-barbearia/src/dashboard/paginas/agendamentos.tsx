@@ -1,13 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { Agendamento } from "../../models/agendamento";
-import ImpactoBarbeariaServico from "../../servicos/impacto-barbearia-servico";
 import CardsAgendamentos from "../componentes/cards-agendamentos";
 import FormularioAgendamentos from "../componentes/formulario-agendamentos";
 import useAgendamentos from "../hooks/use-agendamentos-hook";
 
 const PaginaAgendamentos = () => {
     const [abrirFormulario, setAbrirFormulario] = useState<boolean>(false);
-    const [agendamentoSendoAtualizado, setAgendamentoSendoAtualizado] = useState<Agendamento | undefined>();
+    const [agendamentoSendoAtualizado] = useState<Agendamento | undefined>();
     const { agendamentos, deletarAgendamento, atualizarAgendamento, criarAgendamento, atualizarAgendamentos } = useAgendamentos();
 
     return (
