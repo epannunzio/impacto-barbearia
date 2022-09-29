@@ -1,4 +1,4 @@
-import Servicos from "../dashboard/utils/servicos-enum";
+import { Servicos } from "../dashboard/utils/servicos-enum";
 import { Cliente } from "./cliente";
 import { HorarioDisponivel } from "./horarios-disponiveis";
 

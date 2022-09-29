@@ -1,4 +1,4 @@
-import Servicos from "../dashboard/utils/servicos-enum";
+import { Servicos } from "../dashboard/utils/servicos-enum";
 
 const obterPrecoServico = (servico: Servicos) => {
     switch (servico) {

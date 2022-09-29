@@ -6,7 +6,7 @@ import { Agendamento, AgendamentoViewModel } from "../../models/agendamento";
 import { HorarioDisponivel } from "../../models/horarios-disponiveis";
 import ImpactoBarbeariaServico from "../../servicos/impacto-barbearia-servico";
 import useClientes from "../hooks/use-clientes-hook";
-import Servicos from "../utils/servicos-enum";
+import { Servicos } from "../utils/servicos-enum";
 
 
 interface IFormularioAgendamentoProps {

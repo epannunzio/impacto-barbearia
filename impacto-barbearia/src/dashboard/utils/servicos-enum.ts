@@ -1,7 +1,11 @@
-enum Servicos {
+export enum Servicos {
     cabelo = 1,
     barba = 2,
     cabeloEBarba = 3
 }
 
-export default Servicos;
+export const LabelServicos = {
+    1: 'Cabelo',
+    2: 'Barba',
+    3: 'Cabelo e Barba'
+}
