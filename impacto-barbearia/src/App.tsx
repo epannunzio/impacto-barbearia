@@ -18,7 +18,7 @@ function App() {
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className='navbar-nav'>
               <li className='nav-item'>
-                <Link to="/agendamentos" className='nav-link'>Agendamentos</Link>
+                <Link to="/" className='nav-link'>Agendamentos</Link>
               </li>
               <li className='nav-item'>
                 <Link to="/clientes" className='nav-link'>Clientes</Link>
@@ -27,9 +27,8 @@ function App() {
           </div>
         </nav>
         <Routes>
-          <Route path='/' element={<Dashboard />} />
+          <Route path='/' element={<PaginaAgendamentos />} />
           <Route path='/clientes' element={<PaginaClientes />} />
-          <Route path='/agendamentos' element={<PaginaAgendamentos />} />
         </Routes>
       </BrowserRouter>
     </div>
