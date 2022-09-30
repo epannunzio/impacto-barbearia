@@ -1,7 +1,7 @@
 const formatarDataParaTexto = (dataEmString: string) => {
     const data = new Date(dataEmString);
     const ano = data.getFullYear();
-    const mes = data.getMonth();
+    const mes = data.getMonth() + 1;
     const dia = data.getDate();
     return `${dia}/${mes}/${ano}`;
 }
