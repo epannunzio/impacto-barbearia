@@ -57,7 +57,7 @@ const FormularioAgendamentos = ({
                         servico: tipoDeServico,
                         valor: obterPrecoServico(tipoDeServico),
                         clienteId: clienteSelecionado ?? clientes[0]?.id ?? '',
-                        dataEHora: DataHelper.formatarDataParaApi(dataSelecionada.toString()),
+                        dataEHora: dataSelecionada,
                         horario: horarioSelecionado.horario
                     }
                     await criarAgendamento(novoAgendamento);

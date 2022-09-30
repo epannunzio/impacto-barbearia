@@ -9,9 +9,9 @@ const formatarDataParaTexto = (dataEmString: string) => {
 const formatarDataParaApi = (dataEmString: string) => {
     const data = new Date(dataEmString);
     const ano = data.getFullYear();
-    const mes = (data.getMonth() + 1).toString().padStart(2, "0");
+    const mes = (data.getMonth() + 1);
     const dia = data.getUTCDate();
-    return `${ano}-${mes}-${dia}`;
+    return `${mes}/${dia}/${ano}`;
 }
 
 const formatarDataParaDatePicker = (dataEmString: string) => {

@@ -17,5 +17,5 @@ export interface AgendamentoViewModel {
     valor: number,
     clienteId: string,
     horario: string,
-    dataEHora: string
+    dataEHora: Date
 }
