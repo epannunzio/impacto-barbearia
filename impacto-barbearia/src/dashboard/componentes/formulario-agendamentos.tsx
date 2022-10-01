@@ -36,7 +36,7 @@ const FormularioAgendamentos = ({
     const buscarHorarios = useCallback(async () => {
         var data = DataHelper.formatarDataParaApi(dataSelecionada?.toString() ?? '');
         const horarios = await ImpactoBarbeariaServico.buscarHorariosDisponiveis(data)
-        setHorariosDisponiveis(horarios);
+        setHorariosDisponiveis(horarios.sort((a: HorarioDisponivel, b: HorarioDisponivel) => a.horario.localeCompare(b.horario)));
     }, [dataSelecionada]);
 
     useEffect(() => {

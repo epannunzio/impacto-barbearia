@@ -32,7 +32,7 @@ const PaginaAgendamentos = () => {
                             fecharFormulario={() => setAbrirFormulario(false)} />
                         : agendamentos.length ?
                             <CardsAgendamentos
-                                agendamentos={agendamentos}
+                                agendamentos={agendamentos.sort((a, b) => a.dataEHora.localeCompare(b.dataEHora))}
                                 deletarAgendamento={async () => { }} /> : (<p>Carregando agendamentos...</p>)
                 }
             </>
