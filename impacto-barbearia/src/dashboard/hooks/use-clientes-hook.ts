@@ -11,7 +11,7 @@ const useClientes = () => {
     }, []);
 
     const atualizarClientes = (clientesAtualizados: Cliente[]) => {
-        setClientes(clientesAtualizados);
+        buscarClientes();
     };
 
     const criarCliente = async (cliente: Cliente) => {
