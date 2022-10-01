@@ -65,15 +65,6 @@ const excluirAgendamento = async (id: string) => {
     }
 }
 
-const atualizarAgendamento = async (agendamento: AgendamentoViewModel) => {
-    try {
-        const response = await api.put(`Agendamentos/Atualizar`, agendamento);
-        return response.data;
-    } catch (err) {
-        console.log(err);
-    }
-}
-
 const buscarHorariosDisponiveis = async (data: string | undefined) => {
     try {
         if (!data) {
@@ -94,7 +85,6 @@ const ImpactoBarbeariaServico = {
     buscarTodosOsAgendamentos,
     criarAgendamento,
     excluirAgendamento,
-    atualizarAgendamento,
     buscarHorariosDisponiveis
 };
 

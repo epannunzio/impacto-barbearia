@@ -50,6 +50,7 @@ const FormularioAgendamentos = ({
                     cliente: undefined,
                     tipoDeServico: tipoDeServico,
                     valor: 0,
+                    dataEHora: dataSelecionada,
                     horario: { horario: '', estaDisponivel: true }
                 }}
                 onSubmit={async (values, { setSubmitting }) => {
@@ -68,10 +69,14 @@ const FormularioAgendamentos = ({
                         <div className='row'>
                             <div className='form-group col-md-12'>
                                 <label htmlFor="data-servico">Data do serviço</label>
-                                <Field type="date" name="dataEHora" className="form-control" onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                                    setDataSelecionada(new Date(event.target.value.replace('/', '-')));
-                                    setHorariosDisponiveis([]);
-                                }} />
+                                <input
+                                    type="date"
+                                    name="dataEHora"
+                                    className="form-control"
+                                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                        setDataSelecionada(new Date(event.target.value));
+                                        setHorariosDisponiveis([]);
+                                    }} />
                                 <ErrorMessage name="nome" component="div" />
                             </div>
                         </div>

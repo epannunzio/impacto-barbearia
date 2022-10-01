@@ -7,7 +7,7 @@ import useAgendamentos from "../hooks/use-agendamentos-hook";
 const PaginaAgendamentos = () => {
     const [abrirFormulario, setAbrirFormulario] = useState<boolean>(false);
     const [agendamentoSendoAtualizado] = useState<Agendamento | undefined>();
-    const { agendamentos, deletarAgendamento, atualizarAgendamento, criarAgendamento, atualizarAgendamentos } = useAgendamentos();
+    const { agendamentos, criarAgendamento, atualizarAgendamentos } = useAgendamentos();
 
     return (
         <>
@@ -26,14 +26,14 @@ const PaginaAgendamentos = () => {
                         <FormularioAgendamentos
                             criarAgendamento={criarAgendamento}
                             estaAtualizando={false}
-                            atualizarAgendamento={atualizarAgendamento}
+                            atualizarAgendamento={async () => { }}
                             agendamentoSendoAtualizado={agendamentoSendoAtualizado}
                             atualizarAgendamentos={atualizarAgendamentos}
                             fecharFormulario={() => setAbrirFormulario(false)} />
                         : agendamentos.length ?
                             <CardsAgendamentos
                                 agendamentos={agendamentos}
-                                deletarAgendamento={deletarAgendamento} /> : (<p>Carregando agendamentos...</p>)
+                                deletarAgendamento={async () => { }} /> : (<p>Carregando agendamentos...</p>)
                 }
             </>
         </>
