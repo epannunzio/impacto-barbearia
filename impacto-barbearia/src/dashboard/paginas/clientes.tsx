@@ -1,36 +1,32 @@
-import { useEffect, useState } from "react";
-import { Cliente } from "../models/cliente";
-import ImpactoBarbeariaServico from "../servicos/impacto-barbearia-servico";
-import ModalCriacaoCliente from "./componentes/modal-criacao-cliente";
-import CardsClientes from "./componentes/cards-clientes";
+import { useState } from "react";
+import { Cliente } from "../../models/cliente";
+import ImpactoBarbeariaServico from "../../servicos/impacto-barbearia-servico";
+import CardsClientes from "../componentes/cards-clientes";
+import ModalCriacaoCliente from "../componentes/modal-criacao-cliente";
+import useClientes from "../hooks/use-clientes-hook";
 
-const Dashboard = () => {
-    const [clientes, setClientes] = useState<Cliente[]>([]);
+const PaginaClientes = () => {
     const [abrirModal, setAbrirModal] = useState<boolean>(false);
     const [estaAtualizando, setEstaAtualizando] = useState<boolean>(false);
     const [clienteSendoAtualizado, setClientesendoAtualizado] = useState<Cliente | undefined>();
-
-    const buscarClientes = async () => {
-        const resposta = await ImpactoBarbeariaServico.buscarTodosOsClientes();
-        setClientes(resposta);
-    }
+    const { clientes, atualizarClientes } = useClientes();
 
     const criarCliente = async (cliente: Cliente) => {
         await ImpactoBarbeariaServico.criarCliente(cliente);
-        buscarClientes();
+        atualizarClientes([...clientes, cliente]);
         fecharModal();
     }
 
     const deletarCliente = async (id: string) => {
         await ImpactoBarbeariaServico.excluirCliente(id);
-        buscarClientes();
+        atualizarClientes(clientes.filter(cliente => cliente.id !== id));
     }
 
     const atualizarCliente = async (cliente: Cliente) => {
         await ImpactoBarbeariaServico.atualizarCliente(cliente).then(_ => {
             setClientesendoAtualizado(undefined);
-            buscarClientes();
             fecharModal();
+            atualizarClientes([]);
         });
     }
 
@@ -50,14 +46,9 @@ const Dashboard = () => {
         setAbrirModal(true);
     }
 
-    useEffect(() => {
-        buscarClientes();
-    }, []);
-
     return (
         <>
-            <h1 className='titulo'>Impacto Barbearia</h1>
-            <h2>Clientes</h2>
+            <h1 className='titulo'>Clientes</h1>
             <ModalCriacaoCliente
                 abrirModal={abrirModal}
                 fecharModal={fecharModal}
@@ -65,23 +56,21 @@ const Dashboard = () => {
                 estaAtualizando={estaAtualizando}
                 atualizarCliente={atualizarCliente}
                 clienteSendoAtualizado={clienteSendoAtualizado} />
+            <button
+                onClick={() => mostrarModal()}
+                type="button"
+                className="btn btn-primary"
+                data-toggle="modal"
+                data-target="#exampleModal">
+                Adicionar cliente
+            </button>
             {clientes.length ?
-                <>
-                    <button
-                        onClick={() => mostrarModal()}
-                        type="button"
-                        className="btn btn-primary"
-                        data-toggle="modal"
-                        data-target="#exampleModal">
-                        Adicionar cliente
-                    </button>
-                    <CardsClientes
-                        clientes={clientes}
-                        abrirModalAtualizacao={abrirModalAtualizacao}
-                        deletarCliente={deletarCliente} />
-                </> : (<p>Carregando clientes...</p>)}
+                <CardsClientes
+                    clientes={clientes}
+                    abrirModalAtualizacao={abrirModalAtualizacao}
+                    deletarCliente={deletarCliente} /> : (<p>Carregando clientes...</p>)}
         </>
     );
 }
 
-export default Dashboard;
+export default PaginaClientes;
