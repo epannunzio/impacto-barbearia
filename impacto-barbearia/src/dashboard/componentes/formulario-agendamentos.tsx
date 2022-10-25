@@ -22,6 +22,8 @@ interface IFormularioAgendamentoProps {
 const FormularioAgendamentos = ({
     criarAgendamento,
     fecharFormulario,
+    agendamentoSendoAtualizado,
+    atualizarAgendamento,
 }: IFormularioAgendamentoProps) => {
     const [tipoDeServico, setTipoDeServico] = useState<Servicos>(Servicos.cabelo);
     const [dataSelecionada, setDataSelecionada] = useState<Date>(new Date());
@@ -47,10 +49,10 @@ const FormularioAgendamentos = ({
         <>
             <Formik
                 initialValues={{
-                    cliente: undefined,
-                    tipoDeServico: tipoDeServico,
-                    valor: 0,
-                    dataEHora: dataSelecionada,
+                    cliente: agendamentoSendoAtualizado?.cliente ?? undefined,
+                    tipoDeServico: agendamentoSendoAtualizado?.servico ?? tipoDeServico,
+                    valor: agendamentoSendoAtualizado?.valor ?? 0,
+                    dataEHora: agendamentoSendoAtualizado?.dataEHora ?? dataSelecionada,
                     horario: { horario: '', estaDisponivel: true }
                 }}
                 onSubmit={async (values, { setSubmitting }) => {

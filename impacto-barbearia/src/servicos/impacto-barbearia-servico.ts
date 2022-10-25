@@ -1,4 +1,4 @@
-import { AgendamentoViewModel } from "../models/agendamento";
+import { Agendamento, AgendamentoViewModel } from "../models/agendamento";
 import { Cliente } from "../models/cliente";
 import api from "./api";
 
@@ -77,6 +77,15 @@ const buscarHorariosDisponiveis = async (data: string | undefined) => {
     }
 }
 
+const atualizarAgendamento = async (agendamento: Agendamento) => {
+    try {
+        const response = await api.put('Agendamentos/Atualizar', agendamento);
+        return response.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 const ImpactoBarbeariaServico = {
     buscarTodosOsClientes,
     criarCliente,
@@ -85,7 +94,8 @@ const ImpactoBarbeariaServico = {
     buscarTodosOsAgendamentos,
     criarAgendamento,
     excluirAgendamento,
-    buscarHorariosDisponiveis
+    atualizarAgendamento,
+    buscarHorariosDisponiveis,
 };
 
 export default ImpactoBarbeariaServico;

@@ -6,8 +6,23 @@ import useAgendamentos from "../hooks/use-agendamentos-hook";
 
 const PaginaAgendamentos = () => {
     const [abrirFormulario, setAbrirFormulario] = useState<boolean>(false);
-    const [agendamentoSendoAtualizado] = useState<Agendamento | undefined>();
-    const { agendamentos, criarAgendamento, atualizarAgendamentos } = useAgendamentos();
+    const [agendamentoSendoAtualizado, setAgendamentoSendoAtualizado] = useState<Agendamento | undefined>();
+    const { agendamentos, criarAgendamento, atualizarAgendamentos, atualizarAgendamento, deletarAgendamento } = useAgendamentos();
+
+    const iniciarAtualizacaoAgendamento = (agendamento: Agendamento | undefined) => {
+        setAgendamentoSendoAtualizado(agendamento)
+        setAbrirFormulario(true);
+    }
+
+    const finalizarAtualizacaoAgendamento = async (agendamento: Agendamento) => {
+        try {
+            await atualizarAgendamento(agendamento);
+        } catch (erro) {
+            console.log(erro);
+            setAbrirFormulario(false);
+        }
+        setAbrirFormulario(false);
+    }
 
     return (
         <>
@@ -33,7 +48,10 @@ const PaginaAgendamentos = () => {
                         : agendamentos.length ?
                             <CardsAgendamentos
                                 agendamentos={agendamentos.sort((a, b) => a.dataEHora.localeCompare(b.dataEHora))}
-                                deletarAgendamento={async () => { }} /> : (<p>Carregando agendamentos...</p>)
+                                deletarAgendamento={deletarAgendamento}
+                                inicializarAtualizacaoAgendamento={iniciarAtualizacaoAgendamento}
+                                finalizarAtualizacaoAgendamento={finalizarAtualizacaoAgendamento}
+                            /> : (<p>Carregando agendamentos...</p>)
                 }
             </>
         </>
