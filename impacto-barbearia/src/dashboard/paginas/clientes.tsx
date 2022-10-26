@@ -64,7 +64,7 @@ const PaginaClientes = () => {
                 data-target="#exampleModal">
                 Adicionar cliente
             </button>
-            {clientes.length ?
+            {clientes?.length ?
                 <CardsClientes
                     clientes={clientes}
                     abrirModalAtualizacao={abrirModalAtualizacao}
