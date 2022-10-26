@@ -1,4 +1,4 @@
-import { Agendamento, AgendamentoViewModel } from "../models/agendamento";
+import { AgendamentoViewModel } from "../models/agendamento";
 import { Cliente } from "../models/cliente";
 import api from "./api";
 
@@ -77,7 +77,7 @@ const buscarHorariosDisponiveis = async (data: string | undefined) => {
     }
 }
 
-const atualizarAgendamento = async (agendamento: Agendamento) => {
+const atualizarAgendamento = async (agendamento: AgendamentoViewModel) => {
     try {
         const response = await api.put('Agendamentos/Atualizar', agendamento);
         return response.data;

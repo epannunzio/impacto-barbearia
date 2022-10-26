@@ -6,7 +6,6 @@ interface ICardsAgendamentosProps {
     agendamentos: Agendamento[],
     deletarAgendamento: (id: string) => Promise<void>,
     inicializarAtualizacaoAgendamento: (agendamento: Agendamento) => void,
-    finalizarAtualizacaoAgendamento: (agendamento: Agendamento) => Promise<void>
 }
 
 const CardsAgendamentos = ({ agendamentos, deletarAgendamento, inicializarAtualizacaoAgendamento }: ICardsAgendamentosProps) => {

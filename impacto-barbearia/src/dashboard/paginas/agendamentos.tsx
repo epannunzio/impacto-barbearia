@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Agendamento } from "../../models/agendamento";
+import { Agendamento, AgendamentoViewModel } from "../../models/agendamento";
 import CardsAgendamentos from "../componentes/cards-agendamentos";
 import FormularioAgendamentos from "../componentes/formulario-agendamentos";
 import useAgendamentos from "../hooks/use-agendamentos-hook";
@@ -14,7 +14,7 @@ const PaginaAgendamentos = () => {
         setAbrirFormulario(true);
     }
 
-    const finalizarAtualizacaoAgendamento = async (agendamento: Agendamento) => {
+    const finalizarAtualizacaoAgendamento = async (agendamento: AgendamentoViewModel) => {
         try {
             await atualizarAgendamento(agendamento);
         } catch (erro) {
@@ -41,7 +41,7 @@ const PaginaAgendamentos = () => {
                         <FormularioAgendamentos
                             criarAgendamento={criarAgendamento}
                             estaAtualizando={false}
-                            atualizarAgendamento={async () => { }}
+                            atualizarAgendamento={atualizarAgendamento}
                             agendamentoSendoAtualizado={agendamentoSendoAtualizado}
                             atualizarAgendamentos={atualizarAgendamentos}
                             fecharFormulario={() => setAbrirFormulario(false)} />
@@ -50,7 +50,6 @@ const PaginaAgendamentos = () => {
                                 agendamentos={agendamentos.sort((a, b) => a.dataEHora.localeCompare(b.dataEHora))}
                                 deletarAgendamento={deletarAgendamento}
                                 inicializarAtualizacaoAgendamento={iniciarAtualizacaoAgendamento}
-                                finalizarAtualizacaoAgendamento={finalizarAtualizacaoAgendamento}
                             /> : (<p>Carregando agendamentos...</p>)
                 }
             </>

@@ -24,7 +24,8 @@ const useAgendamentos = () => {
         buscarAgendamentos();
     }, [buscarAgendamentos]);
 
-    const atualizarAgendamento = useCallback(async (agendamento: Agendamento) => {
+    const atualizarAgendamento = useCallback(async (agendamento: AgendamentoViewModel) => {
+        console.log(agendamento);
         await ImpactoBarbeariaServico.atualizarAgendamento(agendamento);
         buscarAgendamentos();
     }, [buscarAgendamentos])

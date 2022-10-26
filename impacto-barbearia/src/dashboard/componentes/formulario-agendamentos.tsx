@@ -1,5 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useLayoutEffect, useState } from "react";
 import DataHelper from "../../helpers/data-helper";
 import obterPrecoServico from "../../helpers/preco-servico-helper";
 import { Agendamento, AgendamentoViewModel } from "../../models/agendamento";
@@ -41,29 +41,48 @@ const FormularioAgendamentos = ({
         setHorariosDisponiveis(horarios.sort((a: HorarioDisponivel, b: HorarioDisponivel) => a.horario.localeCompare(b.horario)));
     }, [dataSelecionada]);
 
+    const prepararValoresAgendamentoSendoAtualizado = useCallback(() => {
+        if (agendamentoSendoAtualizado) {
+            setTipoDeServico(agendamentoSendoAtualizado.servico);
+            setClienteSelecionado(agendamentoSendoAtualizado.cliente?.id);
+            setDataSelecionada(new Date(DataHelper.formatarDataParaApi(agendamentoSendoAtualizado.dataEHora)));
+            setHorarioSelecionado(agendamentoSendoAtualizado.horario);
+        }
+    }, [agendamentoSendoAtualizado]);
+
     useEffect(() => {
         buscarHorarios();
     }, [buscarHorarios, dataSelecionada]);
+
+    useLayoutEffect(() => {
+        prepararValoresAgendamentoSendoAtualizado();
+    }, [prepararValoresAgendamentoSendoAtualizado])
+
+    const opcaoSelecionada = (clienteId: String) => clienteId === clienteSelecionado;
 
     return (
         <>
             <Formik
                 initialValues={{
-                    cliente: agendamentoSendoAtualizado?.cliente ?? undefined,
+                    cliente: undefined,
                     tipoDeServico: agendamentoSendoAtualizado?.servico ?? tipoDeServico,
                     valor: agendamentoSendoAtualizado?.valor ?? 0,
-                    dataEHora: agendamentoSendoAtualizado?.dataEHora ?? dataSelecionada,
                     horario: { horario: '', estaDisponivel: true }
                 }}
                 onSubmit={async (values, { setSubmitting }) => {
                     const novoAgendamento: AgendamentoViewModel = {
+                        id: agendamentoSendoAtualizado?.id ?? '',
                         servico: tipoDeServico,
                         valor: obterPrecoServico(tipoDeServico),
                         clienteId: clienteSelecionado ?? clientes[0]?.id ?? '',
                         dataEHora: dataSelecionada,
                         horario: horarioSelecionado.horario
                     }
-                    await criarAgendamento(novoAgendamento);
+                    if (agendamentoSendoAtualizado) {
+                        atualizarAgendamento(novoAgendamento);
+                    } else {
+                        await criarAgendamento(novoAgendamento);
+                    }
                     fecharFormulario();
                 }}>
                 {({ isSubmitting }) => (
@@ -100,7 +119,7 @@ const FormularioAgendamentos = ({
                                     const element = event.target as HTMLSelectElement;
                                     setClienteSelecionado(element.value);
                                 }}>
-                                    {clientes.length ? clientes.map(cliente => <option value={cliente.id} key={cliente.id}>{cliente.nome} {cliente.sobrenome}</option>) : <option key='carregando'>Carregando clientes</option>}
+                                    {clientes.length ? clientes.map(cliente => <option value={cliente.id} key={cliente.id} selected={opcaoSelecionada(cliente?.id ?? '')}>{cliente.nome} {cliente.sobrenome}</option>) : <option key='carregando'>Carregando clientes</option>}
                                 </Field>
                                 <ErrorMessage name="nome" component="div" />
                             </div>
