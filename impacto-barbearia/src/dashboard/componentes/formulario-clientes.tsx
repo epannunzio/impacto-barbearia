@@ -1,5 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { Cliente } from "../../models/cliente";
+import * as Yup from "yup";
 
 interface IFormularioClienteProps {
     criarCliente: (cliente: Cliente) => Promise<void>,
@@ -9,8 +10,26 @@ interface IFormularioClienteProps {
 }
 
 const FormularioCliente = ({ criarCliente, estaAtualizando, atualizarCliente, clienteSendoAtualizado }: IFormularioClienteProps) => {
+
+    const formValidationSchema = Yup.object().shape({
+        ddi: Yup.string().matches(
+            /\d{2,3}/,
+            "DDI inválido"
+        ),
+        ddd: Yup.string().matches(
+            /\d{2}/,
+            "DDD inválido"
+        ),
+        numero: Yup.string().matches(
+            /[\s9]?\d{4}-?\d{4}$/,
+            "Telefone inválido"
+        )
+    });
+
     return (
         <Formik
+            validateOnChange={true}
+            validationSchema={formValidationSchema}
             initialValues={{
                 nome: clienteSendoAtualizado?.nome ?? '',
                 sobrenome: clienteSendoAtualizado?.sobrenome ?? '',
@@ -33,16 +52,16 @@ const FormularioCliente = ({ criarCliente, estaAtualizando, atualizarCliente, cl
                 };
                 estaAtualizando ? atualizarCliente(novoCliente) : criarCliente(novoCliente);
             }}>
-            {({ isSubmitting }) => (
+            {({ errors, isSubmitting }) => (
                 <Form className='cliente-form container'>
                     <div className='form-control'>
                         <label htmlFor="nome">Nome</label>
-                        <Field type="text" name="nome" placeholder='Ex: João' className="form-control" maxlength="15" required />
+                        <Field type="text" name="nome" placeholder='Ex: João' className="form-control" maxLength="15" required />
                         <ErrorMessage name="nome" component="div" />
                     </div>
                     <div className='form-control'>
                         <label htmlFor="sobrenome">Sobrenome</label>
-                        <Field type="text" name="sobrenome" placeholder='Ex: Silva' className="form-control" maxlength="15" required />
+                        <Field type="text" name="sobrenome" placeholder='Ex: Silva' className="form-control" maxLength="15" required />
                         <ErrorMessage name="sobrenome" component="div" />
                     </div>
                     <div className='form-control'>
@@ -52,12 +71,12 @@ const FormularioCliente = ({ criarCliente, estaAtualizando, atualizarCliente, cl
                     </div>
                     <div className='form-control col-1'>
                         <label htmlFor="ddi">DDI</label>
-                        <Field type="text" name="ddi" placeholder='Ex: 55' className="form-control" maxlength="3" required />
+                        <Field type="text" name="ddi" placeholder='Ex: 55' className="form-control" maxLength="3" helperText={errors.ddi} error={errors.ddi} required />
                         <ErrorMessage name="ddi" component="div" />
                     </div>
                     <div className='form-control col-1'>
                         <label htmlFor="ddd">DDD</label>
-                        <Field type="text" name="ddd" placeholder='Ex: 11' className="form-control" maxlength="2" required />
+                        <Field type="text" name="ddd" placeholder='Ex: 11' className="form-control" maxLength="2" helperText={errors.ddd} error={errors.ddd} required />
                         <ErrorMessage name="ddd" component="div" />
                     </div>
                     <div className='form-control col-2'>
@@ -66,8 +85,10 @@ const FormularioCliente = ({ criarCliente, estaAtualizando, atualizarCliente, cl
                             type="text"
                             name="numero"
                             placeholder='Ex: 912345678'
-                            maxlength="9"
+                            maxLength="9"
                             className="form-control"
+                            helperText={errors.numero}
+                            error={errors.numero}
                             required />
                         <ErrorMessage name="numero" component="div" />
                     </div>
