@@ -19,6 +19,17 @@ const useAgendamentos = () => {
         buscarAgendamentos();
     }, [buscarAgendamentos]);
 
+    const deletarAgendamento = useCallback(async (id: string) => {
+        await ImpactoBarbeariaServico.excluirAgendamento(id);
+        buscarAgendamentos();
+    }, [buscarAgendamentos]);
+
+    const atualizarAgendamento = useCallback(async (agendamento: AgendamentoViewModel) => {
+        console.log(agendamento);
+        await ImpactoBarbeariaServico.atualizarAgendamento(agendamento);
+        buscarAgendamentos();
+    }, [buscarAgendamentos])
+
     useEffect(() => {
         buscarAgendamentos();
     }, [buscarAgendamentos])
@@ -27,6 +38,8 @@ const useAgendamentos = () => {
         agendamentos,
         atualizarAgendamentos,
         criarAgendamento,
+        deletarAgendamento,
+        atualizarAgendamento
     };
 }
 
