@@ -1,10 +1,12 @@
 import { AgendamentoViewModel } from "../models/agendamento";
 import { Cliente } from "../models/cliente";
+import { LoginViewModel } from "../models/login";
 import api from "./api";
+
 
 const buscarTodosOsClientes = async () => {
     try {
-        const response = await api.get('Clientes/Buscar');
+        const response = await api.get('Clientes/Buscar', getConfig());
         return response.data;
     } catch (err) {
         console.log(err);
@@ -13,7 +15,7 @@ const buscarTodosOsClientes = async () => {
 
 const criarCliente = async (cliente: Cliente) => {
     try {
-        const response = await api.post('Clientes/Criar', cliente);
+        const response = await api.post('Clientes/Criar', cliente, getConfig());
         return response.data;
     } catch (err) {
         console.log(err);
@@ -22,7 +24,7 @@ const criarCliente = async (cliente: Cliente) => {
 
 const excluirCliente = async (id: string) => {
     try {
-        const response = await api.delete(`Clientes/Deletar/${id}`);
+        const response = await api.delete(`Clientes/Deletar/${id}`, getConfig());
         return response.data;
     } catch (err) {
         console.log(err);
@@ -31,7 +33,7 @@ const excluirCliente = async (id: string) => {
 
 const atualizarCliente = async (cliente: Cliente) => {
     try {
-        const response = await api.put(`Clientes/Atualizar`, cliente);
+        const response = await api.put(`Clientes/Atualizar`, cliente, getConfig());
         return response.data;
     } catch (err) {
         console.log(err);
@@ -40,7 +42,7 @@ const atualizarCliente = async (cliente: Cliente) => {
 
 const buscarTodosOsAgendamentos = async () => {
     try {
-        const response = await api.get('Agendamentos/Buscar');
+        const response = await api.get('Agendamentos/Buscar', getConfig());
         return response.data;
     } catch (err) {
         console.log(err);
@@ -49,7 +51,7 @@ const buscarTodosOsAgendamentos = async () => {
 
 const criarAgendamento = async (agendamento: AgendamentoViewModel) => {
     try {
-        const response = await api.post('Agendamentos/Criar', agendamento);
+        const response = await api.post('Agendamentos/Criar', agendamento, getConfig());
         return response.data;
     } catch (err) {
         console.log(err);
@@ -58,7 +60,7 @@ const criarAgendamento = async (agendamento: AgendamentoViewModel) => {
 
 const excluirAgendamento = async (id: string) => {
     try {
-        const response = await api.delete(`Agendamentos/Deletar/${id}`);
+        const response = await api.delete(`Agendamentos/Deletar/${id}`, getConfig());
         return response.data;
     } catch (err) {
         console.log(err);
@@ -70,7 +72,7 @@ const buscarHorariosDisponiveis = async (data: string | undefined) => {
         if (!data) {
             throw Error('Data não pode ser nula.');
         }
-        const response = await api.get(`Agendamentos/HorariosDisponiveis?data=${data}`);
+        const response = await api.get(`Agendamentos/HorariosDisponiveis?data=${data}`, getConfig());
         return response.data;
     } catch (err) {
         console.log(err);
@@ -79,10 +81,26 @@ const buscarHorariosDisponiveis = async (data: string | undefined) => {
 
 const atualizarAgendamento = async (agendamento: AgendamentoViewModel) => {
     try {
-        const response = await api.put('Agendamentos/Atualizar', agendamento);
+        const response = await api.put('Agendamentos/Atualizar', agendamento, getConfig());
         return response.data;
     } catch (err) {
         console.log(err);
+    }
+}
+
+const autenticar = async (login: LoginViewModel) => {
+    try {
+        const response = await api.post('Usuarios/Autenticar', login);
+        return response.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+const getConfig = () => {
+    var token = localStorage.getItem('token');
+    return {
+        headers: { Authorization: `Bearer ${token}` }
     }
 }
 
@@ -96,6 +114,7 @@ const ImpactoBarbeariaServico = {
     excluirAgendamento,
     atualizarAgendamento,
     buscarHorariosDisponiveis,
+    autenticar
 };
 
 export default ImpactoBarbeariaServico;
